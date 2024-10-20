@@ -4,9 +4,9 @@ output = "internal/repository/models"
 no-hooks = true
 no-tests = true
 [psql]
-  dbname = "demo"
-  host = "localhost"
+  dbname = "postgres"
+  host = "172.18.0.2"
   port = 5432
   user = "postgres"
-  password = "Password123"
+  password = "123456"
   sslmode = "disable"
