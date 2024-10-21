@@ -6,7 +6,6 @@ services:
       - POSTGRES_DB=postgres
       - POSTGRES_PASSWORD=123456
     volumes:
-      # - ./internal/db/migrations:/var/lib/postgresql/data/
       - postgredbdata:/var/lib/postgresql/data/
     ports:
       - "5432:5432"
@@ -20,8 +19,6 @@ services:
       context: ./db/
       dockerfile: Dockerfile
     command: "postgresql://postgres:123456@friend-management-go-postgres.db-1:5432/postgres?sslmode=disable up"
-    # volumes:
-      # - ./internal/db/migrations:/migrations
     networks:
       - my_network
     depends_on:
