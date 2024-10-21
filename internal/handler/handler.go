@@ -2,6 +2,7 @@ package handler
 
 import (
 	"encoding/json"
+	"fmt"
 	"friend-management-go/internal/model"
 	"friend-management-go/internal/service"
 	"net/http"
@@ -32,6 +33,11 @@ func (h *FriendshipHandler) CreateFriendship(w http.ResponseWriter, r *http.Requ
 
 func (h *FriendshipHandler) GetFriendsList(w http.ResponseWriter, r *http.Request) {
 	email := chi.URLParam(r, "email")
+	fmt.Fprintf(w, "Email: %s\n", email)
+	// if email == "" {
+	// 	http.Error(w, "Email is required", http.StatusBadRequest)
+	// }
+
 	friends, err := h.service.GetFriends(email)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
