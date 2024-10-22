@@ -20,8 +20,6 @@ func NewPostgresRepository(db *sql.DB) *PostgresRepository {
 	return &PostgresRepository{db: db}
 }
 
-const SUBCRIBED_FRIENDSHIP_STATUS string = "subcribed"
-
 func (p *PostgresRepository) MakeFriend(friendship model.Friendship) error {
 	friend := models.Friendship{
 		UserEmail:   null.StringFrom(friendship.UserEmail),
