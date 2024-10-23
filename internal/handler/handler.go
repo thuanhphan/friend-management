@@ -2,8 +2,8 @@ package handler
 
 import (
 	"encoding/json"
-	"fmt"
 	"friend-management-go/internal/model"
+	"friend-management-go/internal/repository"
 	"friend-management-go/internal/service"
 	"net/http"
 	"net/mail"
@@ -22,6 +22,13 @@ type CommonFriendsRequest struct {
 	Email2 string `json:"email2"`
 }
 
+type FriendListResponse struct {
+	Success    bool     `json:"success"`
+	Friends    []string `json:"friends,omitempty"`
+	Recipients []string `json:"recipients,omitempty"`
+	Count      int      `json:"count,omitempty"`
+}
+
 func NewFrienshipHandler(service service.IFriendshipService) *FriendshipHandler {
 	return &FriendshipHandler{service: service}
 }
@@ -32,16 +39,34 @@ func (h *FriendshipHandler) CreateFriendship(w http.ResponseWriter, r *http.Requ
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
+
+	exists, err := h.service.FriendshipExists(friendship.UserEmail, friendship.FriendEmail)
+	if err != nil {
+		http.Error(w, "Error checking friendship existence", http.StatusInternalServerError)
+		return
+	}
+	if exists {
+		response := repository.MakeFriendResponse{Success: false}
+		w.Header().Set("Content-Type", "application/json")
+		json.NewEncoder(w).Encode(response)
+		return
+	}
+
 	if err := h.service.MakeFriend(friendship); err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
+
+	response := FriendListResponse{
+		Success: true,
+	}
+
 	w.WriteHeader(http.StatusCreated)
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(response)
 }
 
 func (h *FriendshipHandler) GetFriendsList(w http.ResponseWriter, r *http.Request) {
-	// email := chi.URLParam(r, "email")
-	fmt.Println("GetFriendsList called") // Debugging statement
 	var request GetFriendsRequest
 	if err := json.NewDecoder(r.Body).Decode(&request); err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
@@ -62,10 +87,19 @@ func (h *FriendshipHandler) GetFriendsList(w http.ResponseWriter, r *http.Reques
 
 	friends, err := h.service.GetFriends(email)
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+		http.Error(w, "Error retrieving friends", http.StatusInternalServerError)
 		return
 	}
-	json.NewEncoder(w).Encode(friends)
+
+	response := FriendListResponse{
+		Success: true,
+		Friends: friends,
+		Count:   len(friends),
+	}
+
+	w.WriteHeader(http.StatusOK)
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(response)
 }
 
 func (h *FriendshipHandler) GetCommonFriends(w http.ResponseWriter, r *http.Request) {
@@ -80,7 +114,16 @@ func (h *FriendshipHandler) GetCommonFriends(w http.ResponseWriter, r *http.Requ
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
-	json.NewEncoder(w).Encode(friends)
+
+	response := FriendListResponse{
+		Success: true,
+		Friends: friends,
+		Count:   len(friends),
+	}
+
+	w.WriteHeader(http.StatusOK)
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(response)
 }
 
 func (h *FriendshipHandler) UpdateFriendshipStatus(w http.ResponseWriter, r *http.Request) {
@@ -94,5 +137,35 @@ func (h *FriendshipHandler) UpdateFriendshipStatus(w http.ResponseWriter, r *htt
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
+
+	response := FriendListResponse{
+		Success: true,
+	}
+
 	w.WriteHeader(http.StatusOK)
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(response)
+}
+
+func (h *FriendshipHandler) GetReceivableUpdates(w http.ResponseWriter, r *http.Request) {
+	var request GetFriendsRequest
+	if err := json.NewDecoder(r.Body).Decode(&request); err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+
+	friends, err := h.service.GetReceivableUpdates(request.Email)
+	if err != nil {
+		http.Error(w, "Error retrieving friends", http.StatusInternalServerError)
+		return
+	}
+
+	response := FriendListResponse{
+		Success:    true,
+		Recipients: friends,
+	}
+
+	w.WriteHeader(http.StatusOK)
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(response)
 }
