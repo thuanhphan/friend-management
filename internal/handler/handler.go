@@ -3,7 +3,6 @@ package handler
 import (
 	"encoding/json"
 	"friend-management-go/internal/model"
-	"friend-management-go/internal/repository"
 	"friend-management-go/internal/service"
 	"net/http"
 	"net/mail"
@@ -46,7 +45,7 @@ func (h *FriendshipHandler) CreateFriendship(w http.ResponseWriter, r *http.Requ
 		return
 	}
 	if exists {
-		response := repository.MakeFriendResponse{Success: false}
+		response := FriendListResponse{Success: false}
 		w.Header().Set("Content-Type", "application/json")
 		json.NewEncoder(w).Encode(response)
 		return
