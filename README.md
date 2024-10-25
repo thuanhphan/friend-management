@@ -30,3 +30,19 @@ go install github.com/volatiletech/sqlboiler/v4/drivers/sqlboiler-psql@latest <b
 6. Create a sqlboiler.toml configuration file in your project root. Then, generate the ORM code: <br />
 sqlboiler psql
 
+### Dummy data
+-- Insert data into users table
+INSERT INTO users (email, name) VALUES
+('john.doe@example.com', 'John Doe'),
+('jane.smith@example.com', 'Jane Smith'),
+('alice.johnson@example.com', 'Alice Johnson'),
+('bob.brown@example.com', 'Bob Brown'),
+('carol.white@example.com', 'Carol White');
+
+-- Insert data into friendships table
+INSERT INTO friendships (id, user_email, friend_email, status) VALUES
+(1, 'john.doe@example.com', 'jane.smith@example.com', 'friends'),
+(2, 'alice.johnson@example.com', 'bob.brown@example.com', 'subscribed'),
+(3, 'carol.white@example.com', 'john.doe@example.com', 'blocked'),
+(4, 'jane.smith@example.com', 'alice.johnson@example.com', 'friends'),
+(5, 'bob.brown@example.com', 'carol.white@example.com', 'subscribed');
