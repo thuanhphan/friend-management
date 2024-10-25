@@ -32,17 +32,17 @@ sqlboiler psql
 
 ### Dummy data
 -- Insert data into users table
-INSERT INTO users (email, name) VALUES
-('john.doe@example.com', 'John Doe'),
-('jane.smith@example.com', 'Jane Smith'),
-('alice.johnson@example.com', 'Alice Johnson'),
-('bob.brown@example.com', 'Bob Brown'),
-('carol.white@example.com', 'Carol White');
+INSERT INTO users (email, name) VALUES <br />
+('john.doe@example.com', 'John Doe'), <br />
+('jane.smith@example.com', 'Jane Smith'), <br />
+('alice.johnson@example.com', 'Alice Johnson'), <br />
+('bob.brown@example.com', 'Bob Brown'), <br />
+('carol.white@example.com', 'Carol White'); <br />
 
 -- Insert data into friendships table
-INSERT INTO friendships (id, user_email, friend_email, status) VALUES
-(1, 'john.doe@example.com', 'jane.smith@example.com', 'friends'),
-(2, 'alice.johnson@example.com', 'bob.brown@example.com', 'subscribed'),
-(3, 'carol.white@example.com', 'john.doe@example.com', 'blocked'),
-(4, 'jane.smith@example.com', 'alice.johnson@example.com', 'friends'),
-(5, 'bob.brown@example.com', 'carol.white@example.com', 'subscribed');
+INSERT INTO friendships (id, user_email, friend_email, status) VALUES <br />
+(1, 'john.doe@example.com', 'jane.smith@example.com', 'friends'), <br />
+(2, 'alice.johnson@example.com', 'bob.brown@example.com', 'subscribed'), <br />
+(3, 'carol.white@example.com', 'john.doe@example.com', 'blocked'), <br />
+(4, 'jane.smith@example.com', 'alice.johnson@example.com', 'friends'), <br />
+(5, 'bob.brown@example.com', 'carol.white@example.com', 'subscribed'); <br />

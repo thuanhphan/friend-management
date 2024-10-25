@@ -16,9 +16,9 @@ services:
   db.migrations:
     image: db.migrations
     build:
-      context: ./db/
+      context: ./data/
       dockerfile: Dockerfile
-    command: "postgresql://postgres:123456@friend-management-go-postgres.db-1:5432/postgres?sslmode=disable up"
+    command: "postgresql://postgres:123456@friend-management-postgres.db-1:5432/postgres?sslmode=disable up"
     networks:
       - my_network
     depends_on:

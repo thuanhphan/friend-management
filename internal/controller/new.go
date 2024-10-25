@@ -4,7 +4,7 @@ import (
 	"friend-management-go/internal/model"
 )
 
-type IFriendshipService interface {
+type IFriendshipController interface {
 	MakeFriend(friendship model.Friendship) error
 	GetFriends(email string) ([]string, error)
 	GetCommonFriends(email1, email2 string) ([]string, error)
