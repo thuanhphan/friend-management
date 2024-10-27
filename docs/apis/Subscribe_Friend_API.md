@@ -9,7 +9,7 @@
 {
     "user_email": "example@example.com",
     "friend_email": "anhthu@example.com",
-    "status": "subscribe"
+    "status": "subscribed"
 }
 ```
 

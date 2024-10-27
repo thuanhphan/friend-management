@@ -39,10 +39,7 @@ INSERT INTO users (email, name) VALUES <br />
 ('bob.brown@example.com', 'Bob Brown'), <br />
 ('carol.white@example.com', 'Carol White'); <br />
 
--- Insert data into friendships table
-INSERT INTO friendships (id, user_email, friend_email, status) VALUES <br />
-(1, 'john.doe@example.com', 'jane.smith@example.com', 'friends'), <br />
-(2, 'alice.johnson@example.com', 'bob.brown@example.com', 'subscribed'), <br />
-(3, 'carol.white@example.com', 'john.doe@example.com', 'blocked'), <br />
-(4, 'jane.smith@example.com', 'alice.johnson@example.com', 'friends'), <br />
-(5, 'bob.brown@example.com', 'carol.white@example.com', 'subscribed'); <br />
+### Run app
+1. Clone src code <br />
+2. Run docker-compose to migrate data: docker-compose up -d <br />
+3. go run main/main.go
