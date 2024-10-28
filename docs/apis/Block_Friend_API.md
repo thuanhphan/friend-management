@@ -10,10 +10,14 @@
     "user_email": "example@example.com",
     "friend_email": "anhthu@example.com",
 <<<<<<< HEAD
+<<<<<<< HEAD
     "status": "blocked"
 =======
     "status": "block"
 >>>>>>> 7343663 (Update docs, unit test)
+=======
+    "status": "blocked"
+>>>>>>> 856e22d (Refactor structure)
 }
 ```
 

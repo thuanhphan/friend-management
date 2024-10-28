@@ -7,6 +7,7 @@ import (
 	"friend-management-go/internal/controller"
 	"friend-management-go/internal/model"
 	"friend-management-go/internal/pkg/utils"
+<<<<<<< HEAD
 	"net/http"
 )
 
@@ -193,8 +194,9 @@ func (h *FriendshipHandler) GetReceivableUpdates(w http.ResponseWriter, r *http.
 	"friend-management-go/internal/service"
 =======
 >>>>>>> 07f2fdf (apply clean architecture)
+=======
+>>>>>>> 856e22d (Refactor structure)
 	"net/http"
-	"net/mail"
 )
 
 type FriendshipHandler struct {
@@ -238,15 +240,9 @@ func (h *FriendshipHandler) CreateFriendship(w http.ResponseWriter, r *http.Requ
 		return
 	}
 
-	exists, err := h.controller.FriendshipExists(friendship.UserEmail, friendship.FriendEmail)
-	if err != nil {
-		http.Error(w, "Error checking friendship existence", http.StatusInternalServerError)
-		return
-	}
-	if exists {
-		response := FriendListResponse{Success: false}
-		w.Header().Set("Content-Type", "application/json")
-		json.NewEncoder(w).Encode(response)
+	// Validate emails
+	if !utils.IsValidEmail(friendship.UserEmail) || !utils.IsValidEmail(friendship.FriendEmail) {
+		http.Error(w, "Invalid email format", http.StatusBadRequest)
 		return
 	}
 
@@ -272,13 +268,8 @@ func (h *FriendshipHandler) GetFriendsList(w http.ResponseWriter, r *http.Reques
 	}
 	email := request.Email
 
-	if email == "" {
-		http.Error(w, "Email is required", http.StatusBadRequest)
-		return
-	}
-
-	// Validate the email format
-	if _, err := mail.ParseAddress(email); err != nil {
+	// Validate email
+	if !utils.IsValidEmail(request.Email) {
 		http.Error(w, "Invalid email format", http.StatusBadRequest)
 		return
 	}
@@ -312,6 +303,12 @@ func (h *FriendshipHandler) GetCommonFriends(w http.ResponseWriter, r *http.Requ
 		return
 	}
 
+	// Validate emails
+	if !utils.IsValidEmail(request.Email1) || !utils.IsValidEmail(request.Email2) {
+		http.Error(w, "Invalid email format", http.StatusBadRequest)
+		return
+	}
+
 	friends, err := h.controller.GetCommonFriends(request.Email1, request.Email2)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
@@ -336,6 +333,12 @@ func (h *FriendshipHandler) UpdateFriendshipStatus(w http.ResponseWriter, r *htt
 		return
 	}
 
+	// Validate emails
+	if !utils.IsValidEmail(friendship.UserEmail) || !utils.IsValidEmail(friendship.FriendEmail) {
+		http.Error(w, "Invalid email format", http.StatusBadRequest)
+		return
+	}
+
 	if err := h.controller.UpdateFriendshipStatus(friendship); err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
@@ -354,6 +357,12 @@ func (h *FriendshipHandler) GetReceivableUpdates(w http.ResponseWriter, r *http.
 	var request GetFriendsRequest
 	if err := json.NewDecoder(r.Body).Decode(&request); err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+
+	// Validate email
+	if !utils.IsValidEmail(request.Email) {
+		http.Error(w, "Invalid email format", http.StatusBadRequest)
 		return
 	}
 
