@@ -9,7 +9,11 @@
 {
     "user_email": "example@example.com",
     "friend_email": "anhthu@example.com",
+<<<<<<< HEAD
     "status": "blocked"
+=======
+    "status": "block"
+>>>>>>> 7343663 (Update docs, unit test)
 }
 ```
 
