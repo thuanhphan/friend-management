@@ -1,4 +1,4 @@
-package service
+package controller
 
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -14,6 +14,7 @@ type IFriendshipController interface {
 <<<<<<< HEAD
 	GetReceivableUpdates(email string) ([]string, error)
 	UpdateFriendshipStatus(friendship model.Friendship) error
+<<<<<<< HEAD
 	FriendshipExists(email1, eamil2 string) (bool, error)
 =======
 import "friend-management-go/internal/model"
@@ -46,4 +47,6 @@ type IFriendshipService interface {
 	UpdateFriendshipStatus(friendship model.Friendship) error
 	FriendshipExists(email1, eamil2 string) (bool, error)
 >>>>>>> c630ea8 (Customize response, complete FM-8)
+=======
+>>>>>>> 856e22d (Refactor structure)
 }

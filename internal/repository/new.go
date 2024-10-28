@@ -12,6 +12,7 @@ type IFriendshipRepository interface {
 	GetCommonFriends(email1, email2 string) ([]string, error)
 	GetReceivableUpdates(email string) ([]string, error)
 	UpdateFriendshipStatus(friendship model.Friendship) error
+<<<<<<< HEAD
 	FriendshipExists(email1, eamil2 string) (bool, error)
 =======
 	MakeFriend(friendship *model.Friendship) error
@@ -36,4 +37,6 @@ type IFriendshipRepository interface {
 =======
 	FriendshipExists(email1, eamil2 string) (bool, error)
 >>>>>>> c630ea8 (Customize response, complete FM-8)
+=======
+>>>>>>> 856e22d (Refactor structure)
 }

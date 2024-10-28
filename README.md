@@ -45,6 +45,7 @@ INSERT INTO users (email, name) VALUES <br />
 ('bob.brown@example.com', 'Bob Brown'), <br />
 ('carol.white@example.com', 'Carol White'); <br />
 
+<<<<<<< HEAD
 -- Insert data into friendships table
 <<<<<<< HEAD
 INSERT INTO friendships (id, user_email, friend_email, status) VALUES
@@ -118,3 +119,9 @@ INSERT INTO friendships (id, user_email, friend_email, status) VALUES <br />
 (4, 'jane.smith@example.com', 'alice.johnson@example.com', 'friends'), <br />
 (5, 'bob.brown@example.com', 'carol.white@example.com', 'subscribed'); <br />
 >>>>>>> 07f2fdf (apply clean architecture)
+=======
+### Run app
+1. Clone src code <br />
+2. Run docker-compose to migrate data: docker-compose up -d <br />
+3. go run main/main.go
+>>>>>>> 856e22d (Refactor structure)

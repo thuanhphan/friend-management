@@ -102,11 +102,11 @@ func (p *PostgresRepository) GetFriends(email string) ([]string, error) {
 	// Custom SQL query to join users and friendships tables
 	query := `Select email from friendships 
 	    Join users on friendships.user_email = users.email
-		Where friend_email = $1 and status = 'friend'
+		Where friend_email = $1 and status = 'friends'
 		Union
 		Select friend_email
 		From friendships
-		Where user_email = $1 and status = 'friend'`
+		Where user_email = $1 and status = 'friends'`
 
 	// Execute the query and bind the results to the friends slice
 	ctx := context.Background()
@@ -136,14 +136,18 @@ func (p *PostgresRepository) GetCommonFriends(email1, email2 string) ([]string, 
 	var friends []string
 
 	query := `Select email from 
+<<<<<<< HEAD
 	    (Select user_email from friendships where friend_email = $1 and status = 'friend'
 <<<<<<< HEAD
+=======
+	    (Select user_email from friendships where friend_email = $1 and status = 'friends'
+>>>>>>> 856e22d (Refactor structure)
 		Union 
-		Select friend_email from friendships where user_email = $1 and status = 'friend') as list1
+		Select friend_email from friendships where user_email = $1 and status = 'friends') as list1
 		Inner Join
-		(Select user_email from friendships where friend_email = $2 and status = 'friend'
+		(Select user_email from friendships where friend_email = $2 and status = 'friends'
 		Union 
-		Select friend_email from friendships where user_email = $2 and status = 'friend') as list2
+		Select friend_email from friendships where user_email = $2 and status = 'friends') as list2
 		on list1.user_email = list2.user_email
 		Inner Join users on users.email = list1.user_email`
 
@@ -183,23 +187,15 @@ func (p *PostgresRepository) UpdateFriendshipStatus(friendship model.Friendship)
 	return nil
 }
 
-func (p *PostgresRepository) FriendshipExists(userEmail, friendEmail string) (bool, error) {
-	exists, err := models.Friendships(
-		models.FriendshipWhere.UserEmail.EQ(null.StringFrom(userEmail)),
-		models.FriendshipWhere.FriendEmail.EQ(null.StringFrom(friendEmail)),
-	).Exists(context.Background(), p.db)
-	return exists, err
-}
-
 func (p *PostgresRepository) GetReceivableUpdates(email string) ([]string, error) {
 	var friends []string
 
 	query := `Select email from 
 	        (Select user_email from friendships  
-			Where friend_email = $1 and status != 'block'
+			Where friend_email = $1 and status != 'blocked'
 			Union
 			Select friend_email from friendships
-			Where user_email = $1 and status != 'block') as list1
+			Where user_email = $1 and status != 'blocked') as list1
 			Join users on email = list1.user_email`
 
 	ctx := context.Background()
