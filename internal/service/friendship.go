@@ -17,6 +17,14 @@ func (service *FriendshipService) MakeFriend(friendship model.Friendship) error 
 	return service.friendshipRepository.MakeFriend(friendship)
 }
 
-func (service *FriendshipService) GetFriends(email string) ([]model.User, error) {
+func (service *FriendshipService) GetFriends(email string) ([]string, error) {
 	return service.friendshipRepository.GetFriends(email)
+}
+
+func (service *FriendshipService) GetCommonFriends(email1, email2 string) ([]string, error) {
+	return service.friendshipRepository.GetCommonFriends(email1, email2)
+}
+
+func (service *FriendshipService) UpdateFriendshipStatus(friendship model.Friendship) error {
+	return service.friendshipRepository.UpdateFriendshipStatus(friendship)
 }
