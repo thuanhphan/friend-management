@@ -1,5 +1,5 @@
 # friend-management-go
-This is my first Go application
+This is my first Go application - FM
 
 ### Run app
 1. Clone src code <br />
