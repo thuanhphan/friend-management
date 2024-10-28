@@ -1,6 +1,7 @@
 package repository
 
 import (
+<<<<<<< HEAD
 	"context"
 	"database/sql"
 	"friend-management-go/internal/model"
@@ -28,11 +29,35 @@ func (p *PostgresRepository) MakeFriend(friendship model.Friendship) error {
 	if error := friend.Insert(context.Background(), p.db, boil.Infer()); error != nil {
 		return error
 	}
+=======
+	"friend-management-go/internal/model"
+	"log"
+)
+
+func (p *PostgresRepository) MakeFriend(friendship model.Friendship) error {
+	// check connection
+	error := p.connect()
+	if error != nil {
+		log.Fatal(error)
+	}
+	defer p.close()
+
+	// model := models.Friendship{
+	// 	UserEmail:   null.StringFrom(friendship.FriendEmail),
+	// 	FriendEmail: null.StringFrom(friendship.FriendEmail),
+	// 	Status:      null.StringFrom(friendship.Status),
+	// }
+	// // error = model.Insert(context.Background(), p.db, boil.Infer())
+	// // if error != nil {
+	// // 	return error
+	// // }
+>>>>>>> d88719a (Arrange the layered architecture)
 
 	log.Println("New friend inserted successfully!")
 	return nil
 }
 
+<<<<<<< HEAD
 func (p *PostgresRepository) GetFriends(email string) ([]string, error) {
 	var friends []string
 
@@ -151,3 +176,17 @@ func (p *PostgresRepository) GetReceivableUpdates(email string) ([]string, error
 	}
 	return friends, nil
 }
+=======
+func (p *PostgresRepository) GetFriends(user model.User) error {
+	// check connection
+	error := p.connect()
+	if error != nil {
+		log.Fatal(error)
+	}
+	defer p.close()
+
+	//Todos
+
+	return nil
+}
+>>>>>>> d88719a (Arrange the layered architecture)

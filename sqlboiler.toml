@@ -6,17 +6,21 @@ no-tests = true
 [psql]
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   dbname = "postgres"
   host = "localhost"
   port = 5432
   user = "postgres"
   password = "123456"
 =======
+=======
+>>>>>>> d88719a (Arrange the layered architecture)
   dbname = "demo"
   host = "localhost"
   port = 5432
   user = "postgres"
   password = "Password123"
+<<<<<<< HEAD
 >>>>>>> d88719a (Arrange the layered architecture)
 =======
   dbname = "postgres"
@@ -25,4 +29,6 @@ no-tests = true
   user = "postgres"
   password = "123456"
 >>>>>>> eb24ee2 (FM-3)
+=======
+>>>>>>> d88719a (Arrange the layered architecture)
   sslmode = "disable"
