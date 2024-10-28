@@ -4,9 +4,17 @@ output = "internal/repository/models"
 no-hooks = true
 no-tests = true
 [psql]
+<<<<<<< HEAD
   dbname = "postgres"
   host = "localhost"
   port = 5432
   user = "postgres"
   password = "123456"
+=======
+  dbname = "demo"
+  host = "localhost"
+  port = 5432
+  user = "postgres"
+  password = "Password123"
+>>>>>>> d88719a (Arrange the layered architecture)
   sslmode = "disable"

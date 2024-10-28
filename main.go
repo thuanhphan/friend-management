@@ -1,5 +1,6 @@
 package main
 
+<<<<<<< HEAD
 import (
 	"database/sql"
 	"fmt"
@@ -56,4 +57,10 @@ func main() {
 
 	// Start the server
 	log.Fatal(http.ListenAndServe(":8080", r))
+=======
+import "fmt"
+
+func main() {
+	fmt.Println("Server is running 8080")
+>>>>>>> d88719a (Arrange the layered architecture)
 }

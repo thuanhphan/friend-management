@@ -5,6 +5,7 @@ import (
 	"friend-management-go/internal/repository"
 )
 
+<<<<<<< HEAD
 type FriendshipService struct {
 	friendshipRepository repository.IFriendshipRepository
 }
@@ -36,3 +37,16 @@ func (service *FriendshipService) FriendshipExists(email1, email2 string) (bool,
 func (service *FriendshipService) GetReceivableUpdates(email string) ([]string, error) {
 	return service.friendshipRepository.GetReceivableUpdates(email)
 }
+=======
+type DefaultFriendshipService struct {
+	friendshipRepository repository.IFriendshipRepository
+}
+
+func NewDefaultFriendshipService(mFriendshipRepoitory repository.IFriendshipRepository) *DefaultFriendshipService {
+	return &DefaultFriendshipService{friendshipRepository: mFriendshipRepoitory}
+}
+
+func (service *DefaultFriendshipService) GetFriends(email string) ([]model.User, error) {
+	return service.friendshipRepository.GetFriends(email)
+}
+>>>>>>> d88719a (Arrange the layered architecture)
