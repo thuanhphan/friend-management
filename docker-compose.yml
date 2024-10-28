@@ -3,8 +3,8 @@ services:
     image: postgres:14-alpine
     environment:
       - POSTGRES_USER=postgres
-      - POSTGRES_DB=demo
-      - POSTGRES_PASSWORD=Password123
+      - POSTGRES_DB=postgres
+      - POSTGRES_PASSWORD=123456
     volumes:
       # - ./internal/db/migrations:/var/lib/postgresql/data/
       - postgredbdata:/var/lib/postgresql/data/
@@ -17,9 +17,9 @@ services:
   db.migrations:
     image: db.migrations
     build:
-      context: ./internal/db/
+      context: ./db/
       dockerfile: Dockerfile
-    command: "postgresql://postgres:Password123@friend-management-go-postgres.db-1:5432/demo?sslmode=disable up"
+    command: "postgresql://postgres:123456@friend-management-go-postgres.db-1:5432/postgres?sslmode=disable up"
     # volumes:
       # - ./internal/db/migrations:/migrations
     networks:
