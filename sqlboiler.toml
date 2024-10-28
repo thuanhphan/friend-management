@@ -34,7 +34,7 @@ no-tests = true
 >>>>>>> d88719a (Arrange the layered architecture)
 =======
   dbname = "postgres"
-  host = "172.18.0.2"
+  host = "localhost"
   port = 5432
   user = "postgres"
   password = "123456"

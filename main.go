@@ -40,13 +40,6 @@ func main() {
 
 	fmt.Println("Successfully connected to the database!")
 
-	_, err = db.Exec(`INSERT INTO friendships (user_email, friend_email, status) VALUES($1, $2, $3)`, "alice@example.com", "example@example.com", "friend")
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	log.Println("Insert successful")
-
 	// Initialize repository, service, and handler
 	friendshipRepo := repository.NewPostgresRepository(db)
 	friendshipService := service.NewFriendshipService(friendshipRepo)
@@ -55,7 +48,7 @@ func main() {
 	// Set up the router
 	r := chi.NewRouter()
 	r.Post("/make-friends", friendshipHandler.CreateFriendship)
-	// r.Get("/friends/{email}", friendHandler.GetFriends)
+	r.Get("/friends/{email}", friendshipHandler.GetFriendsList)
 	// r.Post("/common-friends", friendHandler.GetCommonFriends)
 	// r.Post("/subscribe", friendHandler.Subscribe)
 	// r.Post("/block", friendHandler.Block)

@@ -11,6 +11,7 @@ import (
 
 	"github.com/volatiletech/null/v8"
 	"github.com/volatiletech/sqlboiler/v4/boil"
+<<<<<<< HEAD
 )
 
 type PostgresRepository struct {
@@ -42,6 +43,8 @@ func (p *PostgresRepository) MakeFriend(friendship model.Friendship) error {
 	"github.com/volatiletech/null/v8"
 	"github.com/volatiletech/sqlboiler/v4/boil"
 	"github.com/volatiletech/sqlboiler/v4/queries/qm"
+=======
+>>>>>>> 324c60e (FM-4)
 )
 
 type PostgresRepository struct {
@@ -66,7 +69,7 @@ func NewPostgresRepository(db *sql.DB) *PostgresRepository {
 
 func (p *PostgresRepository) MakeFriend(friendship model.Friendship) error {
 	friend := models.Friendship{
-		UserEmail:   null.StringFrom(friendship.FriendEmail),
+		UserEmail:   null.StringFrom(friendship.UserEmail),
 		FriendEmail: null.StringFrom(friendship.FriendEmail),
 		Status:      null.StringFrom(friendship.Status),
 	}
@@ -208,24 +211,24 @@ func (p *PostgresRepository) GetFriends(user model.User) error {
 		log.Fatal(error)
 =======
 func (p *PostgresRepository) GetFriends(email string) ([]model.User, error) {
-	friends, err := models.Friendships(qm.Where("user_email = ? AND status = ?", email, "friends")).All(context.Background(), p.db)
+	var friends []model.User
+
+	// Custom SQL query to join users and friendships tables
+	query := `Select email from friendships join users on friendships.user_email = users.email
+			Where friend_email = $1 and status = 'Friend'
+			Union
+			Select friend_email
+			From friendships
+			Where user_email = $1 and status = 'Friend'`
+
+	// Execute the query and bind the results to the friends slice
+	ctx := context.Background()
+	_, err := p.db.ExecContext(ctx, query, email)
+
 	if err != nil {
 		return nil, err
 >>>>>>> eb24ee2 (FM-3)
 	}
-	var users []model.User
-	for _, friend := range friends {
-		if friend.FriendEmail.Valid {
-			user, err := models.Users(qm.Where("email = ?", friend.FriendEmail)).One(context.Background(), p.db)
-			if err != nil {
-				return nil, err
-			}
-			users = append(users, model.User{
-				Email: user.Email,
-				Name:  user.Name.String,
-			})
-		}
-	}
-	return users, nil
+	return friends, nil
 }
 >>>>>>> d88719a (Arrange the layered architecture)
