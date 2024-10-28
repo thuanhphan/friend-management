@@ -20,6 +20,7 @@ func (service *FriendshipService) MakeFriend(friendship model.Friendship) error 
 }
 
 func (service *FriendshipService) GetFriends(email string) ([]string, error) {
+<<<<<<< HEAD
 	return service.friendshipRepository.GetFriends(email)
 }
 
@@ -58,3 +59,15 @@ func (service *FriendshipService) GetFriends(email string) ([]model.User, error)
 	return service.friendshipRepository.GetFriends(email)
 }
 >>>>>>> d88719a (Arrange the layered architecture)
+=======
+	return service.friendshipRepository.GetFriends(email)
+}
+
+func (service *FriendshipService) GetCommonFriends(email1, email2 string) ([]string, error) {
+	return service.friendshipRepository.GetCommonFriends(email1, email2)
+}
+
+func (service *FriendshipService) UpdateFriendshipStatus(friendship model.Friendship) error {
+	return service.friendshipRepository.UpdateFriendshipStatus(friendship)
+}
+>>>>>>> aba7e13 (FM-5,6,7)

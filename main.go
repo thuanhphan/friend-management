@@ -96,10 +96,10 @@ func main() {
 	// Set up the router
 	r := chi.NewRouter()
 	r.Post("/make-friends", friendshipHandler.CreateFriendship)
-	r.Get("/friends/{email}", friendshipHandler.GetFriendsList)
-	// r.Post("/common-friends", friendHandler.GetCommonFriends)
-	// r.Post("/subscribe", friendHandler.Subscribe)
-	// r.Post("/block", friendHandler.Block)
+	r.Post("/friends", friendshipHandler.GetFriendsList)
+	r.Post("/common-friends", friendshipHandler.GetCommonFriends)
+	r.Post("/subscribe", friendshipHandler.UpdateFriendshipStatus)
+	r.Post("/block", friendshipHandler.UpdateFriendshipStatus)
 
 	// Start the server
 	log.Fatal(http.ListenAndServe(":8080", r))
