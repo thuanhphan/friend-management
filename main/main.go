@@ -31,14 +31,7 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-<<<<<<< HEAD
-<<<<<<< HEAD
 	defer db.Close()
-=======
->>>>>>> 07f2fdf (apply clean architecture)
-=======
-	defer db.Close()
->>>>>>> 856e22d (Refactor structure)
 
 	// Verify the connection
 	err = db.Ping()
@@ -50,15 +43,7 @@ func main() {
 
 	// Initialize repository, service, and handler
 	friendshipRepo := repository.NewPostgresRepository(db)
-<<<<<<< HEAD
-<<<<<<< HEAD
 	friendshipController := controller.NewFriendshipController(friendshipRepo, db)
-=======
-	friendshipController := controller.NewFriendshipController(friendshipRepo)
->>>>>>> 07f2fdf (apply clean architecture)
-=======
-	friendshipController := controller.NewFriendshipController(friendshipRepo, db)
->>>>>>> 856e22d (Refactor structure)
 	friendshipHandler := handler.NewFrienshipHandler(friendshipController)
 
 	// Set up the router

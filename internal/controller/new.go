@@ -1,12 +1,4 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
 package controller
-=======
-package service
->>>>>>> 07f2fdf (apply clean architecture)
-=======
-package controller
->>>>>>> 856e22d (Refactor structure)
 
 import (
 	"friend-management-go/internal/model"
