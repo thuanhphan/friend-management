@@ -11,6 +11,7 @@ type IFriendshipService interface {
 	GetFriends(email string) ([]string, error)
 	GetCommonFriends(email1, email2 string) ([]string, error)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	GetReceivableUpdates(email string) ([]string, error)
 	UpdateFriendshipStatus(friendship model.Friendship) error
 	FriendshipExists(email1, eamil2 string) (bool, error)
@@ -40,4 +41,9 @@ type IFriendshipService interface {
 	// // GetReceivableUpdates(email string) (]model.User, error)
 	UpdateFriendshipStatus(friendship model.Friendship) error
 >>>>>>> aba7e13 (FM-5,6,7)
+=======
+	GetReceivableUpdates(email string) ([]string, error)
+	UpdateFriendshipStatus(friendship model.Friendship) error
+	FriendshipExists(email1, eamil2 string) (bool, error)
+>>>>>>> c630ea8 (Customize response, complete FM-8)
 }

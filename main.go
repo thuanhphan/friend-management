@@ -98,6 +98,7 @@ func main() {
 	r.Post("/make-friends", friendshipHandler.CreateFriendship)
 	r.Post("/friends", friendshipHandler.GetFriendsList)
 	r.Post("/common-friends", friendshipHandler.GetCommonFriends)
+	r.Post("/receivable-updates", friendshipHandler.GetReceivableUpdates)
 	r.Post("/subscribe", friendshipHandler.UpdateFriendshipStatus)
 	r.Post("/block", friendshipHandler.UpdateFriendshipStatus)
 

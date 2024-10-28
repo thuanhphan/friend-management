@@ -39,6 +39,7 @@ func (service *FriendshipService) FriendshipExists(email1, email2 string) (bool,
 func (service *FriendshipService) GetReceivableUpdates(email string) ([]string, error) {
 	return service.friendshipRepository.GetReceivableUpdates(email)
 }
+<<<<<<< HEAD
 =======
 type DefaultFriendshipService struct {
 =======
@@ -71,3 +72,5 @@ func (service *FriendshipService) UpdateFriendshipStatus(friendship model.Friend
 	return service.friendshipRepository.UpdateFriendshipStatus(friendship)
 }
 >>>>>>> aba7e13 (FM-5,6,7)
+=======
+>>>>>>> c630ea8 (Customize response, complete FM-8)

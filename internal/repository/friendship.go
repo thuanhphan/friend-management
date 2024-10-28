@@ -13,13 +13,20 @@ import (
 	"github.com/volatiletech/sqlboiler/v4/boil"
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 	"github.com/volatiletech/sqlboiler/v4/queries/qm"
 >>>>>>> aba7e13 (FM-5,6,7)
+=======
+>>>>>>> c630ea8 (Customize response, complete FM-8)
 )
 
 type PostgresRepository struct {
 	db *sql.DB
+}
+
+type MakeFriendResponse struct {
+	Success bool `json:"success"`
 }
 
 func NewPostgresRepository(db *sql.DB) *PostgresRepository {
@@ -33,6 +40,7 @@ func (p *PostgresRepository) MakeFriend(friendship model.Friendship) error {
 		Status:      null.StringFrom(friendship.Status),
 	}
 	if error := friend.Insert(context.Background(), p.db, boil.Infer()); error != nil {
+<<<<<<< HEAD
 		return error
 	}
 =======
@@ -79,6 +87,8 @@ func (p *PostgresRepository) MakeFriend(friendship model.Friendship) error {
 	}
 	error := friend.Insert(context.Background(), p.db, boil.Infer())
 	if error != nil {
+=======
+>>>>>>> c630ea8 (Customize response, complete FM-8)
 		return error
 	}
 >>>>>>> eb24ee2 (FM-3)
@@ -131,6 +141,7 @@ func (p *PostgresRepository) GetCommonFriends(email1, email2 string) ([]string, 
 
 	query := `Select email from 
 	    (Select user_email from friendships where friend_email = $1 and status = 'friend'
+<<<<<<< HEAD
 		Union 
 		Select friend_email from friendships where user_email = $1 and status = 'friend') as list1
 		Inner Join
@@ -268,12 +279,14 @@ func (p *PostgresRepository) GetCommonFriends(email1, email2 string) ([]string, 
 
 	query := `Select email from 
 	    (Select user_email from friendships where friend_email = $1
+=======
+>>>>>>> c630ea8 (Customize response, complete FM-8)
 		Union 
-		Select friend_email from friendships where user_email = $1) as list1
+		Select friend_email from friendships where user_email = $1 and status = 'friend') as list1
 		Inner Join
-		(Select user_email from friendships where friend_email = $2
+		(Select user_email from friendships where friend_email = $2 and status = 'friend'
 		Union 
-		Select friend_email from friendships where user_email = $2) as list2
+		Select friend_email from friendships where user_email = $2 and status = 'friend') as list2
 		on list1.user_email = list2.user_email
 		Inner Join users on users.email = list1.user_email`
 
@@ -304,33 +317,57 @@ func (p *PostgresRepository) GetCommonFriends(email1, email2 string) ([]string, 
 =======
 
 func (p *PostgresRepository) UpdateFriendshipStatus(friendship model.Friendship) error {
-	friend := models.Friendship{
+	ctx := context.Background()
+	newFriendship := models.Friendship{
 		UserEmail:   null.StringFrom(friendship.UserEmail),
 		FriendEmail: null.StringFrom(friendship.FriendEmail),
 		Status:      null.StringFrom(friendship.Status),
 	}
+	if error := newFriendship.Insert(ctx, p.db, boil.Infer()); error != nil {
+		return error
+	}
+
+	return nil
+}
+
+func (p *PostgresRepository) FriendshipExists(userEmail, friendEmail string) (bool, error) {
+	exists, err := models.Friendships(
+		models.FriendshipWhere.UserEmail.EQ(null.StringFrom(userEmail)),
+		models.FriendshipWhere.FriendEmail.EQ(null.StringFrom(friendEmail)),
+	).Exists(context.Background(), p.db)
+	return exists, err
+}
+
+func (p *PostgresRepository) GetReceivableUpdates(email string) ([]string, error) {
+	var friends []string
+
+	query := `Select email from 
+	        (Select user_email from friendships  
+			Where friend_email = $1 and status != 'block'
+			Union
+			Select friend_email from friendships
+			Where user_email = $1 and status != 'block') as list1
+			Join users on email = list1.user_email`
 
 	ctx := context.Background()
-	// Check if the friendship already exists
-	existingFriendship, err := models.Friendships(
-		qm.Where("user_email = ? AND friend_email = ?", friend.UserEmail, friend.FriendEmail),
-	).One(ctx, p.db)
+	rows, err := p.db.QueryContext(ctx, query, email)
 
-	if err != nil && err != sql.ErrNoRows {
-		return err
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer rows.Close()
+
+	for rows.Next() {
+		var friendEmail string
+		if err := rows.Scan(&friendEmail); err != nil {
+			return nil, err
+		}
+		friends = append(friends, friendEmail)
 	}
 
-	if existingFriendship != nil {
-		existingFriendship.Status = null.StringFrom(friend.Status.String)
-		_, err = existingFriendship.Update(ctx, p.db, boil.Infer())
-		return err
+	if err := rows.Err(); err != nil {
+		return nil, err
 	}
-
-	newFriendship := &models.Friendship{
-		UserEmail:   null.StringFrom(friendship.UserEmail),
-		FriendEmail: null.StringFrom(friendship.FriendEmail),
-		Status:      null.StringFrom(friendship.Status),
-	}
-	return newFriendship.Insert(ctx, p.db, boil.Infer())
+	return friends, nil
 }
 >>>>>>> aba7e13 (FM-5,6,7)

@@ -52,8 +52,13 @@ Table: friendships
 3. UI will call this API [POST] `/common-friends` for retrieving the common friends list between two email addresses
 4. UI will call this API [POST] `/subscribe` for subscribing to updates from an email address
 <<<<<<< HEAD
+<<<<<<< HEAD
 5. UI will call this API [POST] `/block` for blocking updates from an email address
 6. UI will call this API [POST] `/receivable-updates` for retrieve all email addresses that can receive updates from an email address
 =======
 5. UI will call this API [POST] `/block` for blocking updates from an email address
 >>>>>>> 3d43066 (Update design apis)
+=======
+5. UI will call this API [POST] `/block` for blocking updates from an email address
+6. UI will call this API [POST] `/receivable-updates` for retrieve all email addresses that can receive updates from an email address
+>>>>>>> c630ea8 (Customize response, complete FM-8)
