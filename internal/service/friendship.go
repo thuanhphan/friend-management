@@ -28,3 +28,11 @@ func (service *FriendshipService) GetCommonFriends(email1, email2 string) ([]str
 func (service *FriendshipService) UpdateFriendshipStatus(friendship model.Friendship) error {
 	return service.friendshipRepository.UpdateFriendshipStatus(friendship)
 }
+
+func (service *FriendshipService) FriendshipExists(email1, email2 string) (bool, error) {
+	return service.friendshipRepository.FriendshipExists(email1, email2)
+}
+
+func (service *FriendshipService) GetReceivableUpdates(email string) ([]string, error) {
+	return service.friendshipRepository.GetReceivableUpdates(email)
+}
