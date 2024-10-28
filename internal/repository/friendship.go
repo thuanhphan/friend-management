@@ -15,6 +15,10 @@ type PostgresRepository struct {
 	db *sql.DB
 }
 
+type MakeFriendResponse struct {
+	Success bool `json:"success"`
+}
+
 func NewPostgresRepository(db *sql.DB) *PostgresRepository {
 	return &PostgresRepository{db: db}
 }
