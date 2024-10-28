@@ -52,6 +52,7 @@ INSERT INTO friendships (id, user_email, friend_email, status) VALUES
 (3, 'carol.white@example.com', 'john.doe@example.com', 'blocked'),
 (4, 'jane.smith@example.com', 'alice.johnson@example.com', 'friends'),
 (5, 'bob.brown@example.com', 'carol.white@example.com', 'subscribed');
+<<<<<<< HEAD
 
 1. Install Go (the lastest stable version if you haven't already)
 Then create a new Go project and initialize it with Go modules:
@@ -106,3 +107,5 @@ go get github.com/kelseyhightower/envconfig
 >>>>>>> 9ff2063 (Edit README.md)
 =======
 >>>>>>> ba890b0 (Remove unused code)
+=======
+>>>>>>> a78f4b5 (update script create table)
