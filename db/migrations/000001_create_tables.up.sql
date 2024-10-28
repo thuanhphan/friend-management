@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 -- CREATE TABLE users (
 --     id SERIAL PRIMARY KEY,
@@ -13,6 +14,8 @@
 -- );
 
 >>>>>>> d88719a (Arrange the layered architecture)
+=======
+>>>>>>> 324c60e (FM-4)
 CREATE TABLE users (
     email VARCHAR(255) PRIMARY KEY,
     name VARCHAR(255)

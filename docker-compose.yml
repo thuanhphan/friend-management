@@ -20,10 +20,13 @@ services:
       dockerfile: Dockerfile
     command: "postgresql://postgres:123456@friend-management-go-postgres.db-1:5432/postgres?sslmode=disable up"
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     # volumes:
       # - ./internal/db/migrations:/migrations
 >>>>>>> eb24ee2 (FM-3)
+=======
+>>>>>>> 324c60e (FM-4)
     networks:
       - my_network
     depends_on:
