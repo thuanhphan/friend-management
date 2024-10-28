@@ -24,6 +24,7 @@ CREATE TABLE users (
 CREATE TABLE friendships (
     id SERIAL PRIMARY KEY,
 <<<<<<< HEAD
+<<<<<<< HEAD
     user_email VARCHAR(255) REFERENCES users(email) NOT NULL,
     friend_email VARCHAR(255) REFERENCES users(email) NOT NULL,
     status VARCHAR(50) NOT NULL -- 'friends', 'subscribed', 'blocked'
@@ -32,4 +33,9 @@ CREATE TABLE friendships (
     friend_email VARCHAR(255) REFERENCES users(email),
     status VARCHAR(50) -- 'friends', 'subscribed', 'blocked'
 >>>>>>> d88719a (Arrange the layered architecture)
+=======
+    user_email VARCHAR(255) REFERENCES users(email) NOT NULL,
+    friend_email VARCHAR(255) REFERENCES users(email) NOT NULL,
+    status VARCHAR(50) NOT NULL -- 'friends', 'subscribed', 'blocked'
+>>>>>>> a78f4b5 (update script create table)
 );
