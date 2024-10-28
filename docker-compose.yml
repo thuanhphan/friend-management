@@ -33,6 +33,7 @@ services:
     build:
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
       context: ./data/
       dockerfile: Dockerfile
 <<<<<<< HEAD
@@ -61,6 +62,11 @@ services:
 >>>>>>> e188882 (Create DBSchema, migrate data to docker)
 =======
 >>>>>>> 324c60e (FM-4)
+=======
+      context: ./data/
+      dockerfile: Dockerfile
+    command: "postgresql://postgres:123456@friend-management-postgres.db-1:5432/postgres?sslmode=disable up"
+>>>>>>> 07f2fdf (apply clean architecture)
     networks:
       - my_network
     depends_on:

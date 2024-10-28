@@ -4,6 +4,7 @@ FROM migrate/migrate
 COPY ./migrations /migrations
 
 ENTRYPOINT [ "migrate", "-path", "/migrations", "-database"]
+<<<<<<< HEAD
 <<<<<<< HEAD:db/Dockerfile
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -17,3 +18,6 @@ CMD ["postgresql://postgres:123456@friend-management-go-postgres.db-1:5432/postg
 =======
 CMD ["postgresql://postgres:123456@friend-management-postgres.db-1:5432/postgres?sslmode=disable up"]
 >>>>>>> 07f2fdf (apply clean architecture):data/Dockerfile
+=======
+CMD ["postgresql://postgres:123456@friend-management-postgres.db-1:5432/postgres?sslmode=disable up"]
+>>>>>>> 07f2fdf (apply clean architecture)

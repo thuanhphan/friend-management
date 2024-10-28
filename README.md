@@ -45,12 +45,16 @@ sqlboiler psql
 ### Dummy data
 -- Insert data into users table
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 07f2fdf (apply clean architecture)
 INSERT INTO users (email, name) VALUES <br />
 ('john.doe@example.com', 'John Doe'), <br />
 ('jane.smith@example.com', 'Jane Smith'), <br />
 ('alice.johnson@example.com', 'Alice Johnson'), <br />
 ('bob.brown@example.com', 'Bob Brown'), <br />
 ('carol.white@example.com', 'Carol White'); <br />
+<<<<<<< HEAD
 
 
 =======
@@ -114,3 +118,13 @@ INSERT INTO friendships (id, user_email, friend_email, status) VALUES
 (4, 'jane.smith@example.com', 'alice.johnson@example.com', 'friends'),
 (5, 'bob.brown@example.com', 'carol.white@example.com', 'subscribed');
 >>>>>>> a78f4b5 (update script create table)
+=======
+
+-- Insert data into friendships table
+INSERT INTO friendships (id, user_email, friend_email, status) VALUES <br />
+(1, 'john.doe@example.com', 'jane.smith@example.com', 'friends'), <br />
+(2, 'alice.johnson@example.com', 'bob.brown@example.com', 'subscribed'), <br />
+(3, 'carol.white@example.com', 'john.doe@example.com', 'blocked'), <br />
+(4, 'jane.smith@example.com', 'alice.johnson@example.com', 'friends'), <br />
+(5, 'bob.brown@example.com', 'carol.white@example.com', 'subscribed'); <br />
+>>>>>>> 07f2fdf (apply clean architecture)

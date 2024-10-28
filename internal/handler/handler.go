@@ -179,7 +179,9 @@ func (h *FriendshipHandler) GetReceivableUpdates(w http.ResponseWriter, r *http.
 =======
 =======
 	"encoding/json"
+	"friend-management-go/internal/controller"
 	"friend-management-go/internal/model"
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 >>>>>>> eb24ee2 (FM-3)
@@ -189,12 +191,14 @@ func (h *FriendshipHandler) GetReceivableUpdates(w http.ResponseWriter, r *http.
 =======
 >>>>>>> 7343663 (Update docs, unit test)
 	"friend-management-go/internal/service"
+=======
+>>>>>>> 07f2fdf (apply clean architecture)
 	"net/http"
 	"net/mail"
 )
 
 type FriendshipHandler struct {
-	service service.IFriendshipService
+	controller controller.IFriendshipController
 }
 
 type GetFriendsRequest struct {
@@ -213,8 +217,8 @@ type FriendListResponse struct {
 	Count      int      `json:"count,omitempty"`
 }
 
-func NewFrienshipHandler(service service.IFriendshipService) *FriendshipHandler {
-	return &FriendshipHandler{service: service}
+func NewFrienshipHandler(controller controller.IFriendshipController) *FriendshipHandler {
+	return &FriendshipHandler{controller: controller}
 }
 
 <<<<<<< HEAD
@@ -234,7 +238,7 @@ func (h *FriendshipHandler) CreateFriendship(w http.ResponseWriter, r *http.Requ
 		return
 	}
 
-	exists, err := h.service.FriendshipExists(friendship.UserEmail, friendship.FriendEmail)
+	exists, err := h.controller.FriendshipExists(friendship.UserEmail, friendship.FriendEmail)
 	if err != nil {
 		http.Error(w, "Error checking friendship existence", http.StatusInternalServerError)
 		return
@@ -246,7 +250,7 @@ func (h *FriendshipHandler) CreateFriendship(w http.ResponseWriter, r *http.Requ
 		return
 	}
 
-	if err := h.service.MakeFriend(friendship); err != nil {
+	if err := h.controller.MakeFriend(friendship); err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
@@ -279,7 +283,7 @@ func (h *FriendshipHandler) GetFriendsList(w http.ResponseWriter, r *http.Reques
 		return
 	}
 
-	friends, err := h.service.GetFriends(email)
+	friends, err := h.controller.GetFriends(email)
 	if err != nil {
 		http.Error(w, "Error retrieving friends", http.StatusInternalServerError)
 		return
@@ -308,7 +312,7 @@ func (h *FriendshipHandler) GetCommonFriends(w http.ResponseWriter, r *http.Requ
 		return
 	}
 
-	friends, err := h.service.GetCommonFriends(request.Email1, request.Email2)
+	friends, err := h.controller.GetCommonFriends(request.Email1, request.Email2)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
@@ -332,7 +336,7 @@ func (h *FriendshipHandler) UpdateFriendshipStatus(w http.ResponseWriter, r *htt
 		return
 	}
 
-	if err := h.service.UpdateFriendshipStatus(friendship); err != nil {
+	if err := h.controller.UpdateFriendshipStatus(friendship); err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
@@ -353,7 +357,7 @@ func (h *FriendshipHandler) GetReceivableUpdates(w http.ResponseWriter, r *http.
 		return
 	}
 
-	friends, err := h.service.GetReceivableUpdates(request.Email)
+	friends, err := h.controller.GetReceivableUpdates(request.Email)
 	if err != nil {
 		http.Error(w, "Error retrieving friends", http.StatusInternalServerError)
 		return

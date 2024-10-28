@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 package controller
+=======
+package service
+>>>>>>> 07f2fdf (apply clean architecture)
 
 import (
 	"friend-management-go/internal/model"
