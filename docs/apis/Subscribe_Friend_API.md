@@ -9,15 +9,7 @@
 {
     "user_email": "example@example.com",
     "friend_email": "anhthu@example.com",
-<<<<<<< HEAD
-<<<<<<< HEAD
     "status": "subscribed"
-=======
-    "status": "subscribe"
->>>>>>> 7343663 (Update docs, unit test)
-=======
-    "status": "subscribed"
->>>>>>> 856e22d (Refactor structure)
 }
 ```
 
