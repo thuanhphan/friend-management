@@ -24,10 +24,10 @@ type IFriendshipRepository interface {
 >>>>>>> d88719a (Arrange the layered architecture)
 =======
 	MakeFriend(friendship model.Friendship) error
-	GetFriends(email string) ([]model.User, error)
-	// GetCommonFriends(email1, email2 string) ([]model.User, error)
+	GetFriends(email string) ([]string, error)
+	GetCommonFriends(email1, email2 string) ([]string, error)
 	// GetReceivableUpdates(email string) (]model.User, error)
-	// UpdateFriendshiptstaus(friendship model.Friendship[) error
+	UpdateFriendshipStatus(friendship model.Friendship) error
 	// CreateUser(user model.User) error
 	// GetUserByEmail(email string) (model.User, error)
 >>>>>>> eb24ee2 (FM-3)
