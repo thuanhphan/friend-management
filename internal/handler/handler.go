@@ -5,7 +5,6 @@ import (
 <<<<<<< HEAD
 	"encoding/json"
 	"friend-management-go/internal/model"
-	"friend-management-go/internal/repository"
 	"friend-management-go/internal/service"
 	"net/http"
 	"net/mail"
