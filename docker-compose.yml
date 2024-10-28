@@ -4,12 +4,17 @@ services:
     environment:
       - POSTGRES_USER=postgres
 <<<<<<< HEAD
+<<<<<<< HEAD
       - POSTGRES_DB=postgres
       - POSTGRES_PASSWORD=123456
     volumes:
 =======
       - POSTGRES_DB=demo
       - POSTGRES_PASSWORD=Password123
+=======
+      - POSTGRES_DB=postgres
+      - POSTGRES_PASSWORD=123456
+>>>>>>> eb24ee2 (FM-3)
     volumes:
       # - ./internal/db/migrations:/var/lib/postgresql/data/
 >>>>>>> e188882 (Create DBSchema, migrate data to docker)
@@ -23,6 +28,7 @@ services:
   db.migrations:
     image: db.migrations
     build:
+<<<<<<< HEAD
 <<<<<<< HEAD
       context: ./data/
       dockerfile: Dockerfile
@@ -41,8 +47,11 @@ services:
 >>>>>>> 07f2fdf (apply clean architecture)
 =======
       context: ./internal/db/
+=======
+      context: ./db/
+>>>>>>> eb24ee2 (FM-3)
       dockerfile: Dockerfile
-    command: "postgresql://postgres:Password123@friend-management-go-postgres.db-1:5432/demo?sslmode=disable up"
+    command: "postgresql://postgres:123456@friend-management-go-postgres.db-1:5432/postgres?sslmode=disable up"
     # volumes:
       # - ./internal/db/migrations:/migrations
 >>>>>>> e188882 (Create DBSchema, migrate data to docker)
