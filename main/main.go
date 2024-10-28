@@ -7,9 +7,9 @@ package main
 import (
 	"database/sql"
 	"fmt"
+	"friend-management-go/internal/controller"
 	"friend-management-go/internal/handler"
 	"friend-management-go/internal/repository"
-	"friend-management-go/internal/service"
 	"log"
 	"net/http"
 
@@ -47,8 +47,8 @@ func main() {
 
 	// Initialize repository, service, and handler
 	friendshipRepo := repository.NewPostgresRepository(db)
-	friendshipService := service.NewFriendshipService(friendshipRepo)
-	friendshipHandler := handler.NewFrienshipHandler(friendshipService)
+	friendshipController := controller.NewFriendshipController(friendshipRepo)
+	friendshipHandler := handler.NewFrienshipHandler(friendshipController)
 
 	// Set up the router
 	r := chi.NewRouter()
