@@ -3,24 +3,9 @@ services:
     image: postgres:14-alpine
     environment:
       - POSTGRES_USER=postgres
-<<<<<<< HEAD
-<<<<<<< HEAD
       - POSTGRES_DB=postgres
       - POSTGRES_PASSWORD=123456
     volumes:
-<<<<<<< HEAD
-=======
-      - POSTGRES_DB=demo
-      - POSTGRES_PASSWORD=Password123
-=======
-      - POSTGRES_DB=postgres
-      - POSTGRES_PASSWORD=123456
->>>>>>> eb24ee2 (FM-3)
-    volumes:
-      # - ./internal/db/migrations:/var/lib/postgresql/data/
->>>>>>> e188882 (Create DBSchema, migrate data to docker)
-=======
->>>>>>> 324c60e (FM-4)
       - postgredbdata:/var/lib/postgresql/data/
     ports:
       - "5432:5432"
@@ -31,42 +16,9 @@ services:
   db.migrations:
     image: db.migrations
     build:
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-      context: ./data/
-      dockerfile: Dockerfile
-<<<<<<< HEAD
-    command: "postgresql://postgres:123456@friend-management-go-postgres.db-1:5432/postgres?sslmode=disable up"
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-    # volumes:
-      # - ./internal/db/migrations:/migrations
->>>>>>> eb24ee2 (FM-3)
-=======
->>>>>>> 324c60e (FM-4)
-=======
-    command: "postgresql://postgres:123456@friend-management-postgres.db-1:5432/postgres?sslmode=disable up"
->>>>>>> 07f2fdf (apply clean architecture)
-=======
-      context: ./internal/db/
-=======
-      context: ./db/
->>>>>>> eb24ee2 (FM-3)
-      dockerfile: Dockerfile
-    command: "postgresql://postgres:123456@friend-management-go-postgres.db-1:5432/postgres?sslmode=disable up"
-<<<<<<< HEAD
-    # volumes:
-      # - ./internal/db/migrations:/migrations
->>>>>>> e188882 (Create DBSchema, migrate data to docker)
-=======
->>>>>>> 324c60e (FM-4)
-=======
       context: ./data/
       dockerfile: Dockerfile
     command: "postgresql://postgres:123456@friend-management-postgres.db-1:5432/postgres?sslmode=disable up"
->>>>>>> 07f2fdf (apply clean architecture)
     networks:
       - my_network
     depends_on:
